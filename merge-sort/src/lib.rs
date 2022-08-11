@@ -2,7 +2,7 @@
 pub mod merge_sort
 {
     // TODO: design general quick sort using rust generics
-    pub fn sort(items: &mut Vec<i32>, p: usize, r: usize)
+    pub fn sort<T: std::cmp::PartialOrd + Copy>(items: &mut Vec<T>, p: usize, r: usize)
     {
         if p >= r
         {
@@ -16,30 +16,23 @@ pub mod merge_sort
         merge(items, p, q, r)
     }
 
-    fn merge(items: &mut Vec<i32>, p: usize, q: usize, r: usize)
+    fn merge<T: std::cmp::PartialOrd + Copy>(items: &mut Vec<T>, p: usize, q: usize, r: usize)
     {
         let n1 = q - p + 1;
         let n2 = r - q;
     
-        let mut left_half_items: Vec<i32> = Vec::new();
-        let mut right_half_items: Vec<i32> = Vec::new();
+        let mut left_half_items: Vec<T> = Vec::new();
+        let mut right_half_items: Vec<T> = Vec::new();
 
         for i in 0..n1
         {
-            println!("{}", i);
             left_half_items.push(items[p + i]);
         }
-        println!("{:?}", left_half_items);
-        print!("\n");
 
         for i in 0..n2
         {
-            println!("{}", i);
             right_half_items.push(items[q + 1 + i]);
         }
-        println!("{:?}", right_half_items);
-
-        print!("\n");
 
         let mut i = 0;
         let mut j = 0;
